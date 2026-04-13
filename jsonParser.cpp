@@ -69,7 +69,7 @@ int main(int argc, char* argv[]){
         // Sometimes there might be a negative value, so we have a tolerance of 3% or .03
         const double packetsPerSecond = std::round(totalPackets / duration);
         const float packetLoss = // TODO: Replace Expected with baseline average PPS
-            std::max(0, ((Expected - packetPerSecond) / Expected) - 0.03) * 100;
+            std::max(0, ((Expected - packetsPerSecond) / Expected) - 0.03) * 100;
 
         // Plugging in calculations into each array, later calculating of all the elements
         throughput_mbps_arr[i] = throughput_mbps;
