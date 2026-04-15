@@ -36,11 +36,13 @@ int main(int argc, char* argv[]){
         }
     }
 
+
     std::ifstream file1(argv[1]);
     std::ifstream file2(argv[2]);
     std::ifstream file3(argv[3]);
     std::ifstream file4(argv[4]);
     std::ifstream file5(argv[5]);
+
 
     const json db1 = json::parse(file1);
     const json db2 = json::parse(file2);
@@ -49,9 +51,11 @@ int main(int argc, char* argv[]){
     const json db5 = json::parse(file5);
     json dbs[] = {db1, db2, db3, db4, db5};
     
+
     double throughput_mbps_arr[5];
     double packetsPerSecond_arr[5];
     double packetLoss_arr[5];
+
 
     for (int i = 0; i < 5; i++) {
         const auto& single_object = dbs[i][0];
@@ -84,6 +88,7 @@ int main(int argc, char* argv[]){
         throughput_mbps_arr[i] = throughput_mbps;
         packetsPerSecond_arr[i] = packetsPerSecond;
         packetLoss_arr[i] = packetLoss;
+
 
         // Displaying statistics
         std::cout << "Run #" << i + 1 << ":\n"
