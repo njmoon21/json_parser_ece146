@@ -9,7 +9,7 @@ using json = nlohmann::json;
 
 // Function to calculate the mean of all 5 elements of an array
 double mean(double array[5]) {
-    double result;
+    double result = 0.0;
     for (int i = 0; i < 5; i++) 
         result += array[i]; 
 
@@ -23,9 +23,17 @@ int main(int argc, char* argv[]){
                   << "Expected Format: './jsonParser file1 file2 file3 file4 file5'\n\n"
                   << "This program is for the ECE146 Tekken 8 Project, where each controlled"
                   << " environment is ran 5 times. Each argument should be a '.json' file"
-                  << " containing information retrieved from Wireshark\n";
+                  << " containing information retrieved from Wireshark\n\n\n";
 
         return 1;
+    }
+
+    for (int i = 0; i < 5; i++){
+        std::ifstream test(argv[i+1]);
+        if (!test.is_open()){
+            std::cerr << "Error: Could not open file: " << argv[i+1] << "\n\n\n";
+            return 1;
+        }
     }
 
     std::ifstream file1(argv[1]);
@@ -68,8 +76,9 @@ int main(int argc, char* argv[]){
         // Expected packet rate should be the average PPS out of 5 baseline runs
         // Sometimes there might be a negative value, so we have a tolerance of 3% or .03
         const double packetsPerSecond = std::round(totalPackets / duration);
-        const float packetLoss = // TODO: Replace Expected with baseline average PPS
-            std::max(0, ((Expected - packetsPerSecond) / Expected) - 0.03) * 100;
+        const double Expected = 0.0; // TODO: This is a placeholder value, replace with baseline PPS later
+        const double packetLoss = // TODO: Replace Expected with baseline average PPS
+            std::max(0.0, ((Expected - packetsPerSecond) / Expected) - 0.03) * 100;
 
         // Plugging in calculations into each array, later calculating of all the elements
         throughput_mbps_arr[i] = throughput_mbps;
@@ -77,7 +86,7 @@ int main(int argc, char* argv[]){
         packetLoss_arr[i] = packetLoss;
 
         // Displaying statistics
-        std::cout << "Run #" << i << ":\n"
+        std::cout << "Run #" << i + 1 << ":\n"
                   << "Total Packets: " << totalPackets << "\n"
                   << "Wireshark Capture Duration: " << duration << "s\n"
                   << "Bits/s A → B: " << AtoB_pps << " bps\n"
