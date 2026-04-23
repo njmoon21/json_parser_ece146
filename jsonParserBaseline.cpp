@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -54,7 +53,6 @@ int main(int argc, char* argv[]){
 
     double throughput_mbps_arr[5];
     double packetsPerSecond_arr[5];
-    double packetLoss_arr[5];
 
 
     for (int i = 0; i < 5; i++) {
@@ -77,17 +75,11 @@ int main(int argc, char* argv[]){
         const double throughput_mbps = std::round((throughput_bps / 1000000) * 100.0) / 100.0;
             
         // Packets per second
-        // Expected packet rate should be the average PPS out of 5 baseline runs
-        // Sometimes there might be a negative value, so we have a tolerance of 3% or .03
         const double packetsPerSecond = std::round(totalPackets / duration);
-        const double Expected = 0.0; // TODO: This is a placeholder value, replace with baseline PPS later
-        const double packetLoss = // TODO: This formula won't work until we have a defined baseline PPS 
-            std::max(0.0, ((Expected - packetsPerSecond) / Expected) - 0.03) * 100;
 
         // Plugging in calculations into each array, later calculating of all the elements
         throughput_mbps_arr[i] = throughput_mbps;
         packetsPerSecond_arr[i] = packetsPerSecond;
-        packetLoss_arr[i] = packetLoss;
 
 
         // Displaying statistics
@@ -99,15 +91,13 @@ int main(int argc, char* argv[]){
                   << "Total Throughput: " << throughput_bps << " bps   |   "
                                           << throughput_mbps << " mbps" << "\n"
                   << "Packets per second: " << packetsPerSecond << "\n"
-                  << "Packet loss rate: " << packetLoss << "%\n\n"
                   << "----------------------------------------\n\n";
     }
 
         
     std::cout << "\nAverage of all runs:\n"
               << "Total Throughput: " << mean(throughput_mbps_arr) << "\n"
-              << "Packets per second: " << mean(packetsPerSecond_arr) << "\n"
-              << "Packet loss rate: " << mean(packetLoss_arr) << "\n\n";
+              << "Packets per second: " << mean(packetsPerSecond_arr) << "\n\n";
 
     return 0;
 }
