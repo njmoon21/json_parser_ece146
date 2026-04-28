@@ -8,27 +8,27 @@
 using json = nlohmann::json;
 
 // Function to calculate the mean of all 5 elements of an array
-double mean(double array[5]) {
+double mean(double array[3]) {
     double result = 0.0;
-    for (int i = 0; i < 5; i++) 
+    for (int i = 0; i < 3; i++) 
         result += array[i]; 
 
-    return result / 5;
+    return result / 3;
 }
 
 
 int main(int argc, char* argv[]){
-    if (argc != 6) {
+    if (argc != 4) {
         std::cerr << "Error: Incorrect number of arguments\n" 
-                  << "Expected Format: './jsonParser file1 file2 file3 file4 file5'\n\n"
+                  << "Expected Format: './jsonParser file1 file2 file3'\n\n"
                   << "This program is for the ECE146 Tekken 8 Project, where each controlled"
-                  << " environment is ran 5 times. Each argument should be a '.json' file"
+                  << " environment is ran 3 times. Each argument should be a '.json' file"
                   << " containing information retrieved from Wireshark\n\n\n";
 
         return 1;
     }
 
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 3; i++){
         std::ifstream test(argv[i+1]);
         if (!test.is_open()){
             std::cerr << "Error: Could not open file: " << argv[i+1] << "\n\n\n";
@@ -36,28 +36,22 @@ int main(int argc, char* argv[]){
         }
     }
 
-
     std::ifstream file1(argv[1]);
     std::ifstream file2(argv[2]);
     std::ifstream file3(argv[3]);
-    std::ifstream file4(argv[4]);
-    std::ifstream file5(argv[5]);
-
 
     const json db1 = json::parse(file1);
     const json db2 = json::parse(file2);
     const json db3 = json::parse(file3);
-    const json db4 = json::parse(file4);
-    const json db5 = json::parse(file5);
-    json dbs[] = {db1, db2, db3, db4, db5};
+    json dbs[] = {db1, db2, db3};
     
 
-    double throughput_mbps_arr[5];
-    double packetsPerSecond_arr[5];
-    double packetLoss_arr[5];
+    double throughput_mbps_arr[3];
+    double packetsPerSecond_arr[3];
+    double packetLoss_arr[3];
 
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
         const auto& single_object = dbs[i][0];
 
         // Bits per second from address to address
