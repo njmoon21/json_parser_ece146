@@ -55,10 +55,10 @@ int main(int argc, char* argv[]){
         const auto& single_object = dbs[i][0];
 
         // Bits per second from address to address
-        const std::string AtoB_pps_str = single_object["Bits/s A → B"];
-        const std::string BtoA_pps_str = single_object["Bits/s B → A"];            
-        const double AtoB_pps = std::stod(AtoB_pps_str);
-        const double BtoA_pps = std::stod(BtoA_pps_str);
+        const std::string AtoB_bps_str = single_object["Bits/s A → B"];
+        const std::string BtoA_bps_str = single_object["Bits/s B → A"];            
+        const double AtoB_bps = std::stod(AtoB_bps_str);
+        const double BtoA_bps = std::stod(BtoA_bps_str);
 
         // Packets
         const std::string totalPackets_str = single_object["Total Packets"];
@@ -67,8 +67,8 @@ int main(int argc, char* argv[]){
         // Duration and Throughput
         const std::string duration_str = single_object["Duration"];
         const double duration = std::stod(duration_str);
-        const double throughput_bps = AtoB_pps + BtoA_pps;
-        const double throughput_mbps = std::round((throughput_bps / 1000000) * 100.0) / 100.0;
+        const double avg_stream_throughput_bps = AtoB_bps + BtoA_bps;
+        const double avg_stream_throughput_mbps = std::round((avg_stream_throughput_bps / 1000000) * 100.0) / 100.0;
             
         // Packets per second
         // Expected packet rate should be the average PPS out of 5 baseline runs
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]){
             std::max(0.0, ((Expected - packetsPerSecond) / Expected) - 0.03) * 100;
 
         // Plugging in calculations into each array, later calculating of all the elements
-        throughput_mbps_arr[i] = throughput_mbps;
+        throughput_mbps_arr[i] = avg_stream_throughput_mbps;
         packetsPerSecond_arr[i] = packetsPerSecond;
         packetLoss_arr[i] = packetLoss;
 
@@ -88,10 +88,10 @@ int main(int argc, char* argv[]){
         std::cout << "Run #" << i + 1 << ":\n"
                   << "Total Packets: " << totalPackets << "\n"
                   << "Wireshark Capture Duration: " << duration << "s\n"
-                  << "Bits/s A → B: " << AtoB_pps << " bps\n"
-                  << "Bits/s B → A: " << BtoA_pps << " bps\n\n"
-                  << "Total Throughput: " << throughput_bps << " bps   |   "
-                                          << throughput_mbps << " mbps" << "\n"
+                  << "Bits/s A → B: " << AtoB_bps << " bps\n"
+                  << "Bits/s B → A: " << BtoA_bps << " bps\n\n"
+                  << "Total Throughput: " << avg_stream_throughput_bps << " bps   |   "
+                                          << avg_stream_throughput_mbps << " mbps" << "\n"
                   << "Packets per second: " << packetsPerSecond << "\n"
                   << "Packet loss rate: " << packetLoss << "%\n\n"
                   << "----------------------------------------\n\n";
