@@ -75,8 +75,8 @@ int main(int argc, char* argv[]){
         // Expected packet rate should be the average PPS out of 5 baseline runs
         // Sometimes there might be a negative value, so we have a tolerance of 3% or .03
         const double packetsPerSecond = std::round(totalPackets / duration);
-        const double Expected = 0.0; // TODO: This is a placeholder value, replace with baseline PPS later
-        const double packetLoss = // TODO: This formula won't work until we have a defined baseline PPS 
+        const double Expected = 234.333;
+        const double packetLoss = 
             std::max(0.0, ((Expected - packetsPerSecond) / Expected) - 0.03) * 100;
 
         // Plugging in calculations into each array, later calculating of all the elements
