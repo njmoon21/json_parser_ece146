@@ -7,7 +7,7 @@
 
 using json = nlohmann::json;
 
-// Function to calculate the mean of all 5 elements of an array
+// Function to calculate the mean of all 3 elements of an array
 double mean(double array[3]) {
     double result = 0.0;
     for (int i = 0; i < 3; i++) 
