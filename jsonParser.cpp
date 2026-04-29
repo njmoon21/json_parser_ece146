@@ -50,6 +50,7 @@ int main(int argc, char* argv[]){
     double packetsPerSecond_arr[3];
     double packetLoss_arr[3];
 
+    std::cout << "\n\n" << std::endl;
 
     for (int i = 0; i < 3; i++) {
         const auto& single_object = dbs[i][0];
@@ -90,8 +91,8 @@ int main(int argc, char* argv[]){
                   << "Wireshark Capture Duration: " << duration << "s\n"
                   << "Bits/s A → B: " << AtoB_bps << " bps\n"
                   << "Bits/s B → A: " << BtoA_bps << " bps\n\n"
-                  << "Total Throughput: " << avg_stream_throughput_bps << " bps   |   "
-                                          << avg_stream_throughput_mbps << " mbps" << "\n"
+                  << "Average Throughput: " << avg_stream_throughput_bps << " bps   |   "
+                                          << avg_stream_throughput_mbps << " Mbps" << "\n"
                   << "Packets per second: " << packetsPerSecond << "\n"
                   << "Packet loss rate: " << packetLoss << "%\n\n"
                   << "----------------------------------------\n\n";
@@ -99,9 +100,9 @@ int main(int argc, char* argv[]){
 
         
     std::cout << "\nAverage of all runs:\n"
-              << "Total Throughput: " << mean(throughput_mbps_arr) << "\n"
+              << "Average Throughput: " << mean(throughput_mbps_arr) << " Mbps" << "\n"
               << "Packets per second: " << mean(packetsPerSecond_arr) << "\n"
-              << "Packet loss rate: " << mean(packetLoss_arr) << "\n\n";
+              << "Packet loss rate: " << mean(packetLoss_arr) << "%\n\n";
 
     return 0;
 }
