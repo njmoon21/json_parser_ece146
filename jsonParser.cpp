@@ -70,7 +70,7 @@ int main(int argc, char* argv[]){
         const std::string duration_str = single_object["Duration"];
         const double duration = std::stod(duration_str);
         const double avg_stream_throughput_bps = AtoB_bps + BtoA_bps;
-        const double avg_stream_throughput_mbps = std::round((avg_stream_throughput_bps / 1000000) * 100.0) / 100.0;
+        const double avg_stream_throughput_mbps = std::round((avg_stream_throughput_bps / 1000000) * 1000000.0) / 1000000.0;
             
         // Packets per second
         // Expected packet rate should be the average PPS out of 5 baseline runs
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]){
         const double Expected = 234.333;
         // const double packetLoss = 
         //    std::max(0.0, ((Expected - packetsPerSecond) / Expected) - 0.03) * 100;
-        const double throughput_loss = (1.0 - (avg_stream_throughput_mbps / 0.39)) * 100.0;
+        const double throughput_loss = (1.0 - (avg_stream_throughput_mbps / 0.388461)) * 100.0;
         const double pps_loss = (1.0 - (packetsPerSecond / Expected)) * 100;
 
         // Plugging in calculations into each array, later calculating of all the elements
