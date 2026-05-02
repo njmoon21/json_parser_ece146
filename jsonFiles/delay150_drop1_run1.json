@@ -1,0 +1,21 @@
+[
+    {
+        "Address A": "98.255.129.102",
+        "Address B": "192.168.1.65",
+        "Bits/s A → B": "194581",
+        "Bits/s B → A": "177267",
+        "Bytes": "10455482",
+        "Bytes A → B": "5471152",
+        "Bytes B → A": "4984330",
+        "Duration": "224.940173",
+        "Packets": "49234",
+        "Packets A → B": "25331",
+        "Packets B → A": "23903",
+        "Percent Filtered": "100",
+        "Port A": "49380",
+        "Port B": "57240",
+        "Rel Start": "0",
+        "Stream ID": "0",
+        "Total Packets": "49234"
+    }
+]

@@ -108,8 +108,8 @@ int main(int argc, char* argv[]){
     std::cout << "\nAverage of all runs:\n"
               << "Average Throughput: " << mean(throughput_mbps_arr) << " Mbps" << "\n"
               << "Packets per second: " << mean(packetsPerSecond_arr) << "\n"
-              << "Throughput Loss: " << mean(throughputLoss_arr) << "%\n"
-              << "PPS Loss: " << mean(packetsPerSecondLoss_arr) << "%\n\n";
+              << "Throughput Change: " << mean(throughputLoss_arr) << "%\n"
+              << "PPS Change: " << mean(packetsPerSecondLoss_arr) << "%\n\n";
 
     return 0;
 }
